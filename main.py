@@ -1,10 +1,26 @@
-from langchain_openai import OpenAI
+from langchain.prompts import HumanMessagePromptTemplate, ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+from langchain.chains import LLMChain
 from dotenv import load_dotenv
 
 load_dotenv()
 
-llm = OpenAI()
+chat = ChatOpenAI()
 
-result = llm.invoke("Write a very very short poem")
+prompt = ChatPromptTemplate(
+    input_variables=["content"],
+    messages=[
+        HumanMessagePromptTemplate.from_template("{content}")
+    ]
+)
 
-print(result)
+chain = LLMChain(
+    llm=chat,
+    prompt=prompt
+)
+
+while True:
+    content = input(">> ")
+
+    result = chain({"content": content})
+    print(result['text'])
