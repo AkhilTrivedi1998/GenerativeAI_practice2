@@ -24,3 +24,5 @@ The input should be a dictionary containing keys of specified input variables ex
 The ChatPromptTemplate will replace the variable with the values specified by the respective keys.
 
 **NOTE:** LangChain has many kinds of memory. For creating a chat based model we're gonna use ***ConversationBufferMemory***. It can be used to store the history of exchanged messages.
+
+**NOTE:** We can add ***FileChatMessageHistory*** to Memory object as chat_memory attribute to create permanent storage of chat history which will keep getting updated and used everytime the program is executed.
