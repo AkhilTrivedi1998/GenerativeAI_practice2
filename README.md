@@ -15,10 +15,12 @@
 
 ***Input --[--> Memory ---> Prompt ---> LLM ---> Memory --]--> Output***
 
-**Placeholders** within the prompt does exactly what the name suggests, they act as placeholders and are replaced with certain values and then passed with the input data to the language model. For chat based models the prompts used assume it to be completion model and has no idea that memory has added extra info to the input, so we have to explicitely use _placeholders_ within these prompt which gets replaced by the data added by memory.
+**Placeholders** within the prompt does exactly what the name suggests, they act as placeholders and are replaced with certain values and then passed with the input data to the language model. For chat based models we can use ***MessagePlaceholder*** to create a prompt containing the entire conversational exchange.
 
 **ChatPromptTemplate** contains two parts:
 1. SystemMessagePromptTemplate: It is optional and it is used customize the model response. It contains a prompt ex - You are a chatbot specializing in {subject}
 2. HumanMessagePromptTemplate: It is the human message that gets passed to the llm. It contains a prompt ex - Tell me about why I need to {query}
 The input should be a dictionary containing keys of specified input variables ex - {subject: "programming", query: "write functions"}
 The ChatPromptTemplate will replace the variable with the values specified by the respective keys.
+
+**NOTE:** LangChain has many kinds of memory. For creating a chat based model we're gonna use ***ConversationBufferMemory***. It can be used to store the history of exchanged messages.
