@@ -26,3 +26,7 @@ The ChatPromptTemplate will replace the variable with the values specified by th
 **NOTE:** LangChain has many kinds of memory. For creating a chat based model we're gonna use ***ConversationBufferMemory***. It can be used to store the history of exchanged messages.
 
 **NOTE:** We can add ***FileChatMessageHistory*** to Memory object as chat_memory attribute to create permanent storage of chat history which will keep getting updated and used everytime the program is executed.
+
+**IMPORTANT:** The problem we encounter with ***ConversationBufferMemory*** is super long-running conversations. There's a limit to how much content we can send to LLMs. Also text generation costs more and takes longer time to get output. We can resolve this problem using ***ConversionSummaryMemory***. This creates a summary of the history of msg exchanged by passing the log to a LLM of its own (hence for a single msg there are now two LLM calls) and instead of adding the entire conversational exchange to the prompt, it adds a single system msg containing the summary of the entire log.
+
+**NOTE:** ***ConversationSummaryMemory*** doesn't work very well with ***FileChatMessageHistory***. So, we're gonna use one or the other.
